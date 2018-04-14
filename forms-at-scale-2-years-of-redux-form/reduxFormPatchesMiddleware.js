@@ -2,7 +2,9 @@ import { actionTypes } from 'redux-form';
 
 const state = {};
 
-// See https://github.com/erikras/redux-form/issues/2742#issuecomment-308840160
+// See https://github.com/erikras/redux-form/issues/2742
+// This patch fixes this problem:
+// https://github.com/erikras/redux-form/issues/2742#issuecomment-308780062
 function onRegisterField(next, action, store) {
   if (__SERVER__) { // << injected by Webpack
     return store.getState().form[action.meta.form];
@@ -11,7 +13,7 @@ function onRegisterField(next, action, store) {
   return next(action);
 }
 
-// See https://github.com/erikras/redux-form/issues/3435#issuecomment-359371803
+// See https://github.com/erikras/redux-form/issues/3435
 function onInitialize(next, action) {
   // Bypass reinitialization
   if ('lastInitialValues' in action.meta) {
@@ -23,7 +25,7 @@ function onInitialize(next, action) {
   return next(action);
 }
 
-// See https://github.com/erikras/redux-form/issues/3435#issuecomment-359371803
+// See https://github.com/erikras/redux-form/issues/3435
 function onDestroy(next, action) {
   state[action.meta.form] = (state[action.meta.form] || 0) - 1;
 
