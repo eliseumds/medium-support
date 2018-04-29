@@ -1,0 +1,56 @@
+[include]
+
+[ignore]
+.*/\.git/.*
+<PROJECT_ROOT>/\.idea/.*
+<PROJECT_ROOT>/\.vagrant/.*
+<PROJECT_ROOT>/\.vscode/.*
+<PROJECT_ROOT>/\.happypack/.*
+<PROJECT_ROOT>/aws-lambda/.*
+<PROJECT_ROOT>/node_modules/fbjs
+<PROJECT_ROOT>/node_modules/draft-js
+<PROJECT_ROOT>/node_modules/config-chain
+<PROJECT_ROOT>/node_modules/simple-markdown
+<PROJECT_ROOT>/node_modules/npmconf
+<PROJECT_ROOT>/node_modules/eslint-plugin-jsx-a11y
+<PROJECT_ROOT>/node_modules/redux-form
+<PROJECT_ROOT>/node_modules/react-universal-component
+<PROJECT_ROOT>/node_modules/webpack-flush-chunks
+<PROJECT_ROOT>/vendor/.*
+<PROJECT_ROOT>/bin/.*
+<PROJECT_ROOT>/saltstack/.*
+<PROJECT_ROOT>/static/.*
+<PROJECT_ROOT>/flow/.*
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/db/.*
+<PROJECT_ROOT>/deployment/.*
+<PROJECT_ROOT>/docs/.*
+<PROJECT_ROOT>/tests/.*
+<PROJECT_ROOT>/var/.*
+<PROJECT_ROOT>/web/.*
+<PROJECT_ROOT>/webpack/.*
+<PROJECT_ROOT>/src/api/.*
+<PROJECT_ROOT>/*.js
+
+[libs]
+./flow/interfaces
+
+[options]
+module.file_ext=.js
+module.file_ext=.scss
+
+# webpack loaders
+module.name_mapper='^\(.*\)\.s?css$' -> '<PROJECT_ROOT>/flow/styles-loader.js'
+module.name_mapper='.*\.\(svg\|png\|jpg\|gif\)$' -> '<PROJECT_ROOT>/flow/url-loader.js'
+
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src/clients
+
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment= \\(.\\|\n\\)*\\$FlowIssue
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+
+esproposal.class_instance_fields=enable
+esproposal.class_static_fields=enable
+esproposal.decorators=ignore
+esproposal.export_star_as=enable

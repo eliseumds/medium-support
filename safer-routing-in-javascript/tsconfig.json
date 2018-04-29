@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "lib": [
+            "es2018"
+        ],
+        "target": "es5",
+        "outDir": "./",
+        "rootDir": "./",
+        "types": [
+            "node",
+            "lodash"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [
+        "index.ts",
+        "examples/symfony.ts"
+    ]
+}
