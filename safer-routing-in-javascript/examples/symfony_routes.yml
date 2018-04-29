@@ -1,0 +1,10 @@
+article:
+  path:     /articles/{_locale}/{year}/{slug}.{_format}
+  controller: App\Controller\ArticleController::show
+  defaults:
+      _format: html
+  requirements:
+      _locale:  en|fr
+      _format:  html|rss
+      year:     \d+
+      queryParamA: foo|bar
