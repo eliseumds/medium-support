@@ -1,0 +1,13 @@
+Error ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ demo.js:46:9
+
+Cannot call getPath with 'bla' bound to pathFn because string [1] is incompatible with function type [2].
+
+ [2] 13│   pathFn: (params: T) => string,
+       :
+     43│   );
+     44│ };
+     45│
+ [1] 46│ getPath('bla');
+     47│
+     48│
+     49│
