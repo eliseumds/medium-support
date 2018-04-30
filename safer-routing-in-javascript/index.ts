@@ -133,8 +133,8 @@ export function generateAnnotatedFile(routes: Array<Route>) {
               const pattern = patterns[paramName];
 
               return t.ifStatement(
-                // if (/\d+/.test(String(myParam)))
-                t.callExpression(
+                // if (!/\d+/.test(String(myParam)))
+                t.unaryExpression('!', t.callExpression(
                   t.memberExpression(
                     t.regExpLiteral(pattern),
                     t.identifier('test')
@@ -147,7 +147,7 @@ export function generateAnnotatedFile(routes: Array<Route>) {
                       ]
                     )
                   ]
-                ),
+                ), /* prefix */ true),
                 // throw new TypeError...
                 t.blockStatement([
                   t.throwStatement(

@@ -64,12 +64,12 @@ function generateAnnotatedFile(routes) {
         ].concat((Object.keys(patterns).map(function (paramName) {
             var pattern = patterns[paramName];
             return t.ifStatement(
-            // if (/\d+/.test(String(myParam)))
-            t.callExpression(t.memberExpression(t.regExpLiteral(pattern), t.identifier('test')), [
+            // if (!/\d+/.test(String(myParam)))
+            t.unaryExpression('!', t.callExpression(t.memberExpression(t.regExpLiteral(pattern), t.identifier('test')), [
                 t.callExpression(t.identifier('String'), [
                     t.identifier(paramName)
                 ])
-            ]), 
+            ]), /* prefix */ true), 
             // throw new TypeError...
             t.blockStatement([
                 t.throwStatement(t.newExpression(t.identifier('TypeError'), [
