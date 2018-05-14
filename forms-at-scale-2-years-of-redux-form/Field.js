@@ -3,7 +3,7 @@
 // From https://github.com/erikras/redux-form/issues/2761#issuecomment-369934818
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, omit } from 'lodash';
+import { get } from 'lodash';
 
 import { Field as ReduxFormField, clearFields, change } from 'redux-form';
 
@@ -12,7 +12,6 @@ export default class Field extends ReduxFormField {
     name: PropTypes.string.isRequired,
     clearOnUnmount: PropTypes.bool,
     resetToInitialValue: PropTypes.bool,
-    nullable: PropTypes.bool,
   };
 
   componentWillUnmount() {
@@ -35,24 +34,33 @@ export default class Field extends ReduxFormField {
   }
 
   clearFieldIfNecessary(props: Object) {
-    const { name, clearOnUnmount, resetToInitialValue } = props;
+    const {
+      name,
+      clearOnUnmount,
+      resetToInitialValue
+    } = props;
+    // this.context comes from "ReduxFormField"
+    const {
+      form,
+      pristine,
+      dispatch,
+      initialValues,
+      sectionPrefix,
+    } = this.context._reduxForm;
 
-    if (clearOnUnmount) {
-      // this.context comes from "ReduxFormField"
-      const initialValues = this.context._reduxForm.initialValues;
-      const sectionPrefix = this.context._reduxForm.sectionPrefix;
+    if (clearOnUnmount && !pristine) {
       const computedName = sectionPrefix ? `${sectionPrefix}.${name}` : name;
       const initialValue = get(initialValues, computedName);
 
       let action;
 
       if (initialValue && resetToInitialValue) {
-        action = change(this.context._reduxForm.form, computedName, initialValue);
+        action = change(form, computedName, initialValue);
       } else {
-        action = clearFields(this.context._reduxForm.form, false, false, computedName);
+        action = clearFields(form, false, false, computedName);
       }
 
-      this.context._reduxForm.dispatch(action);
+      dispatch(action);
     }
   }
 
